@@ -3,10 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
-    <insert id="save" parameterType="member"> <!-- parameterType의 member는 mybatis-config.xml의 alias="member"-->
-        insert into member_table(memberEmail, memberPassword, memberName, memberAge, memberMobile)
-        values (#{memberEmail}, #{memberPassword}, #{memberName}, #{memberAge}, #{memberMobile})
-    </insert>
+	<insert id="save" parameterType="member"> <!-- parameterType의 member는 mybatis-config.xml의 alias="member" -->
+		insert into member_table(memberEmail, memberPassword, memberName,
+		memberAge, memberMobile)
+		values (#{memberEmail}, #{memberPassword},
+		#{memberName}, #{memberAge},
+		#{memberMobile})
+	</insert>
+	<select id="login" parameterType="member" resultType="member">	<!-- resultType은 select 된 데이터를 반환할 (그릇)을 정해주는 것 -->
+		select * from member_table
+		where memberEmail=#{memberEmail} and
+		memberPassword = #{memberPassword}
+	</select>
 </mapper>
 
 

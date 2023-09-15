@@ -1,5 +1,7 @@
 package com.project.member.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,4 +34,22 @@ public class MemberController {
 			return "save";
 		}
 	}
+
+	@GetMapping("/login")
+	public String loginForm() {
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		// https://oh-sh-2134.tistory.com/111
+		boolean loginResult = memberService.login(memberDTO);
+		if (loginResult) {
+			session.setAttribute("loginEmail", memberDTO.getMemberEmail());
+			return "main";
+		} else {
+			return "login";
+		}
+	}
+
 }
