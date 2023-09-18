@@ -35,4 +35,14 @@ public class MemberRepository { // DB와 연결되는 부분 (MyBatis)
 		return sql.delete("Member.deleteById",id);
 	}
 
+	public MemberDTO findByEmail(String searchedEmail) {
+		return sql.selectOne("Member.findByEmail",searchedEmail);
+	}
+
+	public int update(MemberDTO memberDTO) {
+		return sql.update("Member.update",memberDTO);
+	}
+	
+	
+
 }

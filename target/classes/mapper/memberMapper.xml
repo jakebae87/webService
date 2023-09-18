@@ -19,12 +19,23 @@
 		select * from member_table
 	</select>
 	<select id="findById" parameterType="Long" resultType="member">
-		select * from member_table where id = #{id}
+		select *
+		from member_table where id = #{id}
 	</select>
 	<delete id="deleteById" parameterType="Long">
 		delete from member_table
 		where id = #{id}
 	</delete>
+	<select id="findByEmail" parameterType="String"
+		resultType="member">
+		select * from member_table where memberEmail =
+		#{searchedEmail}
+	</select>
+	<update id="update" parameterType="member">
+		update member_table set
+		memberAge=#{memberAge}, memberMobile=#{memberMobile}
+		where id = #{id}
+	</update>
 </mapper>
 
 

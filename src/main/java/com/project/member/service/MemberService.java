@@ -53,4 +53,17 @@ public class MemberService {
 		}
 	}
 
+	public MemberDTO findByEmail(String searchedEmail) {
+		return memberRepository.findByEmail(searchedEmail);
+	}
+
+	public boolean update(MemberDTO memberDTO) {
+		int updateResult = memberRepository.update(memberDTO);
+		if(updateResult > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }
