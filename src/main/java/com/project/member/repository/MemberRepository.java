@@ -1,5 +1,7 @@
 package com.project.member.repository;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,10 @@ public class MemberRepository { // DB와 연결되는 부분 (MyBatis)
 
 	public MemberDTO login(MemberDTO memberDTO) {
 		return sql.selectOne("Member.login", memberDTO);
+	}
+
+	public List<MemberDTO> findAll() {
+		return sql.selectList("Member.findAll");
 	}
 
 }

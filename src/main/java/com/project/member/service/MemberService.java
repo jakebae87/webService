@@ -1,5 +1,7 @@
 package com.project.member.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.project.member.dto.MemberDTO;
@@ -32,6 +34,10 @@ public class MemberService {
 		} else {
 			return false;
 		}
+	}
+
+	public List<MemberDTO> findAll() {
+		return memberRepository.findAll();
 	}
 
 }
