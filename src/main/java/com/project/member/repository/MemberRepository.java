@@ -31,4 +31,8 @@ public class MemberRepository { // DB와 연결되는 부분 (MyBatis)
 		return sql.selectOne("Member.findById", id);
 	}
 
+	public int deleteById(Long id) {
+		return sql.delete("Member.deleteById",id);
+	}
+
 }

@@ -44,4 +44,13 @@ public class MemberService {
 		return memberRepository.findById(id);
 	}
 
+	public boolean deleteById(Long id) {
+		int deleteMember = memberRepository.deleteById(id);
+		if (deleteMember != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
