@@ -27,4 +27,8 @@ public class MemberRepository { // DB와 연결되는 부분 (MyBatis)
 		return sql.selectList("Member.findAll");
 	}
 
+	public MemberDTO findById(Long id) {
+		return sql.selectOne("Member.findById", id);
+	}
+
 }
