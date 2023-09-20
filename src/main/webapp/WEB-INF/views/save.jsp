@@ -1,33 +1,57 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<html>
-<head>
-<title>save</title>
-</head>
-<body>
-	<form action="/member/save" method="post">
-		<input type="text" name="memberEmail" placeholder="이메일"
-			onblur="checkEmailDuplication()"><br>
-		<p id="checkEmailResult"></p>
-		<input type="text" name="memberPassword" placeholder="비밀번호"><br>
-		<input type="text" name="memberName" placeholder="이름"><br>
-		<input type="text" name="memberAge" placeholder="나이"><br>
-		<input type="text" name="memberMobile" placeholder="전화번호"><br>
-		<input type="submit" value="회원가입">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <html>
 
-	</form>
-	<script type="text/javascript">
-		function checkEmailDuplication(e) {
-			document.getElementById
-		}
-	</script>
-</body>
-</html>
+    <head>
+        <meta charset="UTF-8">
+        <title>save</title>
+        <script type="text/javascript">
+            window.onload = function () {
+                let httpRequest;
+                document.getElementById("memberEmail").addEventListener('blur', () => {
+                    let inputEmail = document.getElementById("memberEmail").value;
+                    console.log(inputEmail);
+                    let resultMessage = document.getElementById("checkEmailResult");
 
+                    let reqJson = new Object();
+                    reqJson.email = inputEmail;
 
+                    httpRequest = new XMLHttpRequest();
+                    httpRequest.onreadystatechange = () => {
+                        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                            if (httpRequest.status === 200) {
+                                if (httpRequest.response) {
+                                    resultMessage.style.color = "green";
+                                    resultMessage.innerHTML = "사용가능한 이메일입니다.";
+                                } else {
+                                    resultMessage.style.color = "red";
+                                    resultMessage.innerHTML = "중복되는 이메일입니다.";
+                                }
+                            } else {
+                                alert('에러 발생~!!!');
+                            }
+                        }
+                    }
+                    httpRequest.open('POST', '/member/checkEmail', true);
+                    httpRequest.responseType = 'json';
+                    httpRequest.setRequestHeader('Content-Type', 'application/json');
+                    httpRequest.send(JSON.stringify(reqJson));
+                });
+            }
+        </script>
+    </head>
 
+    <body>
+        <form action="/member/save" method="post">
+            <input type="text" id="memberEmail" name="memberEmail" placeholder="이메일"><br>
+            <p id="checkEmailResult"></p>
+            <input type="text" name="memberPassword" placeholder="비밀번호"><br>
+            <input type="text" name="memberName" placeholder="이름"><br>
+            <input type="text" name="memberAge" placeholder="나이"><br>
+            <input type="text" name="memberMobile" placeholder="전화번호"><br>
+            <input type="submit" value="회원가입">
 
+        </form>
 
+    </body>
 
-
-
-
+    </html>
