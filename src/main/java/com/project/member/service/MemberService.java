@@ -59,10 +59,19 @@ public class MemberService {
 
 	public boolean update(MemberDTO memberDTO) {
 		int updateResult = memberRepository.update(memberDTO);
-		if(updateResult > 0) {
+		if (updateResult > 0) {
 			return true;
-		}else {
+		} else {
 			return false;
+		}
+	}
+
+	public String checkEmail(String email) {
+		String result = memberRepository.checkEmail(email);
+		if (result == null) {
+			return "false";
+		} else {
+			return "true";
 		}
 	}
 

@@ -101,7 +101,9 @@ public class MemberController {
 	}
 
 	@PostMapping("/checkEmail")
-	public void checkEmail(@RequestBody String map) {
-		System.out.println(map+"hihi");
+	@ResponseBody
+	public String checkEmail(@RequestBody String email) {
+		String result = memberService.checkEmail(email);
+		return result;
 	}
 }

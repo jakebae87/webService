@@ -36,6 +36,10 @@
 		memberAge=#{memberAge}, memberMobile=#{memberMobile}
 		where id = #{id}
 	</update>
+	<select id="checkEmail" parameterType="String"
+		resultType="String">
+		select * from member_table where memberEmail=#{email}
+	</select>
 </mapper>
 
 

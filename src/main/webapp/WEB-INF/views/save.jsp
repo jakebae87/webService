@@ -11,7 +11,7 @@
                     let inputEmail = document.getElementById("memberEmail").value;
                     console.log(inputEmail);
                     let resultMessage = document.getElementById("checkEmailResult");
-
+                    
                     let reqJson = new Object();
                     reqJson.email = inputEmail;
 
@@ -19,12 +19,13 @@
                     httpRequest.onreadystatechange = () => {
                         if (httpRequest.readyState === XMLHttpRequest.DONE) {
                             if (httpRequest.status === 200) {
-                                if (httpRequest.response) {
+                                if (httpRequest.responseText !== "false") {	//response는 String 타입으로
                                     resultMessage.style.color = "green";
                                     resultMessage.innerHTML = "사용가능한 이메일입니다.";
                                 } else {
                                     resultMessage.style.color = "red";
-                                    resultMessage.innerHTML = "중복되는 이메일입니다.";
+                                    console.log(httpRequest.responseText);
+                                    resultMessage.innerHTML = inputEmail+"는 중복되는 이메일입니다.";
                                 }
                             } else {
                                 alert('에러 발생~!!!');
@@ -32,7 +33,7 @@
                         }
                     }
                     httpRequest.open('POST', '/member/checkEmail', true);
-                    httpRequest.responseType = 'json';
+                    httpRequest.responseType = 'text';
                     httpRequest.setRequestHeader('Content-Type', 'application/json');
                     httpRequest.send(JSON.stringify(reqJson));
                 });
