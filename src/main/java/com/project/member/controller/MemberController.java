@@ -1,6 +1,7 @@
 package com.project.member.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -102,8 +103,9 @@ public class MemberController {
 
 	@PostMapping("/checkEmail")
 	@ResponseBody
-	public String checkEmail(@RequestBody String email) {
-		String result = memberService.checkEmail(email);
+	public String checkEmail(@RequestBody Map<String, String> email) {
+		String result = memberService.checkEmail(email.get("email"));
+		System.out.println("contorller의 email: " + email.get("email"));
 		return result;
 	}
 }

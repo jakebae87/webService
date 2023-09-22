@@ -67,11 +67,13 @@ public class MemberService {
 	}
 
 	public String checkEmail(String email) {
-		String result = memberRepository.checkEmail(email);
-		if (result == null) {
-			return "false";
+		MemberDTO result = memberRepository.checkEmail(email);
+		System.out.println("memberservice의 email: " + email);
+		System.out.println("reposiroty return: " + result); // memberRepository에서 id값을 반환한다.
+		if (result != null) {
+			return "false"; // 사용불가(중복)
 		} else {
-			return "true";
+			return "true"; // 사용가능
 		}
 	}
 

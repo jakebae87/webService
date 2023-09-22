@@ -37,8 +37,8 @@
 		where id = #{id}
 	</update>
 	<select id="checkEmail" parameterType="String"
-		resultType="String">
-		select * from member_table where memberEmail=#{email}
+		resultType="member">
+		select * from member_table where memberEmail = #{email}
 	</select>
 </mapper>
 

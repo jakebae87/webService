@@ -32,21 +32,23 @@ public class MemberRepository { // DB와 연결되는 부분 (MyBatis)
 	}
 
 	public int deleteById(Long id) {
-		return sql.delete("Member.deleteById",id);
+		return sql.delete("Member.deleteById", id);
 	}
 
 	public MemberDTO findByEmail(String searchedEmail) {
-		return sql.selectOne("Member.findByEmail",searchedEmail);
+		System.out.println("findByEmail: " + sql.selectOne("Member.findByEmail", searchedEmail));
+		return sql.selectOne("Member.findByEmail", searchedEmail);
 	}
 
 	public int update(MemberDTO memberDTO) {
-		return sql.update("Member.update",memberDTO);
+		return sql.update("Member.update", memberDTO);
 	}
 
-	public String checkEmail(String email) {
-		return sql.selectOne("Member.checkEmail",email);
+	public MemberDTO checkEmail(String email) {
+		System.out.println("repository의 email: " + email);
+//		System.out.println("매퍼리턴: " + sql.selectOne("Member.checkEmail", email));
+		return sql.selectOne("Member.checkEmail", email);
+
 	}
-	
-	
 
 }
