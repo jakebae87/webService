@@ -39,11 +39,19 @@
                     httpRequest.send(JSON.stringify(reqJson));
                 });
             }
+            
+            function checkValidation(){
+            	if(document.getElementById("checkEmailResult").style.color == "red"){
+            		alert("이메일을 확인하세요.");
+            		return false;
+            	}
+            }
         </script>
 </head>
 
 <body>
-	<form action="/member/save" method="post">
+	<form action="/member/save" method="post"
+		onsubmit="return checkValidation();">
 		<input type="text" id="memberEmail" name="memberEmail"
 			placeholder="이메일"><br>
 		<p id="checkEmailResult"></p>
