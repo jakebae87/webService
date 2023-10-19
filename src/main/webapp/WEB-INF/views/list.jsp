@@ -5,7 +5,7 @@
 <title>list</title>
 </head>
 <body>
-	<table>
+	<table border="1">
 		<tr>
 			<th>id</th>
 			<th>email</th>
@@ -26,9 +26,9 @@
 				<td>${member.memberAge}</td>
 				<td>${member.memberMobile}</td>
 				<td><a href="/member?id=${member.id}">조회</a></td>
-				<td>
-					<button onclick="deleteMember('${member.id}')">삭제</button>
-				</td>
+				<td><c:if test="${sessionScope.loginEmail == 'admin'}">
+						<button onclick="deleteMember('${member.id}')">삭제</button>
+					</c:if></td>
 			</tr>
 		</c:forEach>
 	</table>

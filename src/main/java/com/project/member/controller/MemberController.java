@@ -47,13 +47,19 @@ public class MemberController {
 		return "login";
 	}
 
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "login";
+	}
+
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		// https://oh-sh-2134.tistory.com/111
 		boolean loginResult = memberService.login(memberDTO);
 		if (loginResult) {
 			session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-			return "main";
+			return "index";
 		} else {
 			return "login";
 		}
